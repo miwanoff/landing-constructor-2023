@@ -76,4 +76,54 @@ EOD;
         $zip->close(); // Завершуємо роботу з архівом
     }
 
+    public function upload($files, $uploaddir)
+    {
+        $message = "";
+
+
+        $target_file = $uploaddir . basename($files["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+// Перевірка, чи є файл зображенням
+
+
+        $check = @getimagesize($files["tmp_name"]);
+        if ($check === false) {
+            //$message = "Файл не є зображення.";
+            $uploadOk = 0;
+        }
+
+
+// Перевірка існування файла
+        if (file_exists($target_file)) {
+            $message = "Файл уже существует.";
+            //$uploadOk = 0;
+        }
+// Перевірка розміру файлу
+        if ($files["size"] > 50000000) {
+            $message = "Файл слишком большой.";
+            $uploadOk = 0;
+        }
+// Роздільна здатність певних файлових форматів
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+            $message = "Извините, разрешены только форматы JPG, JPEG, PNG & GIF.";
+            $uploadOk = 0;
+        }
+// Перевірка, чи встановлено $uploadOk в 0 (by an error)помилка)
+        if ($uploadOk == 0) {
+            $message .= " Файл не был загружен.";
+// Якщо все гаразд, завантажуємо файл
+        } else {
+            if (move_uploaded_file($files['tmp_name'], $target_file)) {
+                $message .= "Файл " . basename($files["tmp_name"]) . " был успешно загружен.";
+            } else {
+                $message .= "При загрузке файла произошла ошибка." . basename($files["tmp_name"]);
+            }
+        }
+
+
+        return $message;
+    }
+
+
 }
