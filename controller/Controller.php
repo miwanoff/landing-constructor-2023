@@ -35,12 +35,15 @@ class Controller
 
         /* Робота с моделлю */
         $str_land = $model->generate(); // генерація тексту лендинга
-        
+
+        // To move to model
         $path = "{$this->dir}/index.html";
         $f = fopen($path, "w+"); // створення файлу лендинга по вказаному шляху
         fwrite($f, $str_land); // запис в файл лендингу
         fclose($f);
+        // To move to model
 
+        $model->achiving($this->dir);
         header("Location: ../index.php");
         ob_flush();
     }

@@ -51,4 +51,29 @@ class Model
 </html>
 EOD;
     }
+
+    public function achiving($dir)
+    {
+        // Створюємо архів
+        $zip = new ZipArchive(); //Створюємо об'єкт для роботи з ZIP-архівами
+        $arch = ".zip";
+        $zip->open($dir . $arch, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
+        $files = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($dir), RecursiveIteratorIterator::LEAVES_ONLY
+        );
+
+        foreach ($files as $name => $file) {
+            // Пропускаємо каталоги (вони додадуться автоматично)
+            if (!$file->isDir()) {
+                // Отримуємо реальний та відносний шляхи файлу
+                $filePath = $file->getRealPath();
+                $lendir = substr($dir, 3);
+                $relativePath = strstr($filePath, $lendir);
+                // Додаємо поточний файл до архіву
+                $zip->addFile($filePath, $relativePath);
+            }
+        }
+        $zip->close(); // Завершуємо роботу з архівом
+    }
+
 }

@@ -17,6 +17,7 @@
         <textarea name="text" value="" placeholder=" Уведіть текст сторінки " class="design" /></textarea>
         <h3>Генерація</h3>
         <input type="submit" name="submitB" value="Сгенерувати Landing" class="design" id="ok" />
+        <a href='landing.zip' class="design" download>Скачать результат</a>
         <h3>Результат</h3>
         <a href='landing/index.html' class="design" target="_blank"> Переглянути результат у новому вікні </a>
     </form>
