@@ -35,6 +35,11 @@ class Controller
             $header = new Header($_POST['header'], $img);
             $blocks[] = $header;
         }
+        if ($_POST['form']) {
+            $form = new Form($_POST['form']);
+            $blocks[] = $form;
+        }
+        
         if ($_POST['text']) {
             $text = new Text($_POST['text']);
             $blocks[] = $text;

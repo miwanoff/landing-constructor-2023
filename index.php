@@ -17,6 +17,8 @@
         <input type="file" name="logo" value="" placeholder="Введите изображение логотипа" class="design" />
         <div id="message"></div>
         <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+        <h3>Форма</h3>
+        <input type="input" name="form" value="" placeholder="Введите название кнопки" class="design" />
         <h3>Текст сторінки*</h3>
         <textarea name="text" value="" placeholder=" Уведіть текст сторінки " class="design" /></textarea>
         <h3>Генерація</h3>
